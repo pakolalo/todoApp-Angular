@@ -32,4 +32,11 @@
   [value]="person.name"
   (change)="changeHandler($event)"
   >
+  <hr />
+  <h2>SIGNALS</h2>
+  <input type="text"
+  [value]="name()"
+  (change)="changeHandler($event)"
+  >
+  <p>name: {{ name() }}</p>
 </div>
