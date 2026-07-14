@@ -1,8 +1,35 @@
-<h1>Hi this is my first project</h1>
-<h2>{{ welcome }}</h2>
-<ul>
-  @for (task of tasks; track task) {
-    <li>{{ task }}</li>
-  }
-</ul>
-
+<div class="container">
+  <h1>Hi this is my first project</h1>
+  <h2>{{ welcome }}</h2>
+  <ul>
+    @for (task of tasks; track task) {
+      <li>{{ task }}</li>
+    }
+  </ul>
+  <hr />
+  <h2>{{ 'Hi'.repeat(4) }}</h2>
+  <p>The result of 3 + 3 = {{ 3 + 3 }}</p>
+  <p>Hi my name is {{ name() }} and i´m {{ age }} years old</p>
+  <hr>
+  <img [src]="img" alt="">
+  <input type="text" [value]="name()">
+  <button [disabled]="disabled">Click me</button>
+  <p>person: {{ person.name }}</p>
+  <p>age: {{ person.age }}</p>
+  <img [src]="person.avatar" alt="">
+  <hr />
+  <button (click)="clickHandler()">Click me</button>
+  <button (dblclick)="clickHandler()">Double Click me</button>
+  <p>(Change)</p>
+  <input type="number" (change)="inputHandler($event)">
+  <p>(KeyDown)</p>
+  <input type="text"
+  [value]="person.name"
+  (keydown)="keyDownHandler($event)"
+  >
+  <p>(change)</p>
+  <input type="text"
+  [value]="person.name"
+  (change)="changeHandler($event)"
+  >
+</div>
