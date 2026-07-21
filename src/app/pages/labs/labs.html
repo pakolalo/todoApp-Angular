@@ -68,4 +68,25 @@
   } @else {
     <div>No soy mayor</div>
   }
+  <hr />
+  <input type="text"
+  [value]="person().name"
+  (change)="changeName($event)"
+  >
+  <div>
+  @switch (person().name) {
+    @case ('Isco') {
+      <p>i am Isco</p>
+    }
+    @case ('Mattia') {
+      <p>I am Mattia</p>
+    }
+    @case ('Ana') {
+      <p>I am Ana</p>
+    }
+    @default {
+      <p>I am no one</p>
+    }
+  }
+  </div>
 </div>
