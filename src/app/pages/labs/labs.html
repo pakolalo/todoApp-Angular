@@ -2,7 +2,7 @@
   <h1>Hi this is my first project</h1>
   <h2>{{ welcome }}</h2>
   <ul>
-    @for (task of tasks; track task) {
+    @for (task of tasks(); track task) {
       <li>{{ task }}</li>
     }
   </ul>
@@ -39,4 +39,11 @@
   (change)="changeHandler($event)"
   >
   <p>name: {{ name() }}</p>
+  <hr />
+  <p>Total: {{ tasks().length }}</p>
+  <ul>
+    @for (task of tasks(); track task; let i = $index) {
+      <li>{{ i }} {{ task }}</li>
+    }
+  </ul>
 </div>

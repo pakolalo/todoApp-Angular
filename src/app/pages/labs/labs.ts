@@ -8,7 +8,7 @@ import { Component, signal } from '@angular/core';
 })
 export class Labs {
   welcome = 'Hi!';
-  tasks = ['Run in the park', 'Learn Angular', 'Do something casual'];
+  tasks = signal(['Run in the park', 'Learn Angular', 'Do something casual']);
   name = signal('Isco');
   age = 36;
   disabled = true;
