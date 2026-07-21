@@ -14,9 +14,9 @@
   <img [src]="img" alt="">
   <input type="text" [value]="name()">
   <button [disabled]="disabled">Click me</button>
-  <p>person: {{ person.name }}</p>
-  <p>age: {{ person.age }}</p>
-  <img [src]="person.avatar" alt="">
+  <p>person: {{ person().name }}</p>
+  <p>age: {{ person().age }}</p>
+  <img [src]="person().avatar" alt="">
   <hr />
   <button (click)="clickHandler()">Click me</button>
   <button (dblclick)="clickHandler()">Double Click me</button>
@@ -24,12 +24,12 @@
   <input type="number" (change)="inputHandler($event)">
   <p>(KeyDown)</p>
   <input type="text"
-  [value]="person.name"
+  [value]="person().name"
   (keydown)="keyDownHandler($event)"
   >
   <p>(change)</p>
   <input type="text"
-  [value]="person.name"
+  [value]="person().name"
   (change)="changeHandler($event)"
   >
   <hr />
@@ -46,4 +46,26 @@
       <li>{{ i }} {{ task }}</li>
     }
   </ul>
+  <hr />
+  <input type="number"
+  [value]="person().age"
+  (change)="changeAge($event)"
+  >
+  @if(1 === 1) {
+    <div>
+    My content
+    </div>
+  }
+  @if(name() === 'Isco') {
+    <div>
+    Soy Isco
+    </div>
+  }
+  @if(person().name === 'Isco' && person().age > 18) {
+    <div>
+    Soy Isco y soy mayor de 18
+    </div>
+  } @else {
+    <div>No soy mayor</div>
+  }
 </div>
