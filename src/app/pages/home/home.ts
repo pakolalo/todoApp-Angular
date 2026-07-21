@@ -12,5 +12,16 @@ export class Home {
     'Practice Angular',
     'Go to the gym',
     'Take care of Mattia'
-  ])
+  ]);
+
+  changeHandler(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newTask = input.value;
+    this.tasks.update((tasks) => [...tasks, newTask]);
+    input.value = '';
+  };
+
+  deleteTask(index: number) {
+    this.tasks.update((tasks) => tasks.filter((task, position) => position !== index));
+  }
 }
