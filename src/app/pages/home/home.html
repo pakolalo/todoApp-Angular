@@ -18,7 +18,11 @@
       <section class="main">
         <ul class="todo-list">
           @for (task of tasks(); track task; let i = $index) {
-            <li [class.completed]="task.completed">
+            <li
+            [class.completed]="task.completed"
+            [class.editing]="task.editing"
+            (dblclick)="updateTaskEditingMode(i)"
+            >
             <div class="view">
               <input
               class="toggle"
@@ -32,7 +36,11 @@
               (click)="deleteTask(i)"
               ></button>
             </div>
-            <input class="edit" value="Buy a unicorn" />
+            <input
+            class="edit"
+            [value]="task.title"
+            (keydown.enter)="updateTaskText(i, $event)"
+            />
           </li>
           }
           <!-- <li class="completed">
@@ -66,11 +74,10 @@
         <!-- This should be `0 items left` by default -->
         <span class="todo-count">
           <strong>{{ tasks().length }}</strong>
-          To do
           @if (tasks().length >= 2) {
-            <span>items</span>
+            <span> items</span>
           } @else {
-            <span>item</span>
+            <span> item</span>
           }
         </span>
         <!-- Remove this if you don't implement routing -->

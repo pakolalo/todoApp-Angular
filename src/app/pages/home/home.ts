@@ -41,15 +41,16 @@ export class Home {
     nonNullable: true,
     validators: [
       Validators.required,
-      Validators.pattern(/^\S.*$/),
     ]
   });
 
   changeHandler() {
     if (this.newTaskControl.valid) {
-      const value = this.newTaskControl.value
-      this.addTask(value);
-      this.newTaskControl.setValue('');
+      const value = this.newTaskControl.value.trim();
+      if (value !==''){
+        this.addTask(value);
+        this.newTaskControl.setValue('');
+      }
     }
   };
 
@@ -78,5 +79,38 @@ export class Home {
         return task;
       });
     });
+  };
+
+  updateTaskEditingMode(index: Number) {
+    this.tasks.update(prevState => {
+      return prevState.map((task, posotion) => {
+        if (posotion === index) {
+          return {
+            ...task,
+            editing: true
+          }
+        }
+        return {
+          ...task,
+          editing: false
+        };
+      })
+    })
+  };
+
+  updateTaskText(index: Number, event: Event) {
+    const input = event.target as HTMLInputElement
+    this.tasks.update(prevState => {
+      return prevState.map((task, posotion) => {
+        if (posotion === index) {
+          return {
+            ...task,
+            title: input.value,
+            editing: false
+          }
+        }
+        return task;
+      })
+    })
   };
 }
