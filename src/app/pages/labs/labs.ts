@@ -1,8 +1,9 @@
 import { Component, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-labs',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './labs.html',
   styleUrl: './labs.css',
 })
@@ -13,11 +14,20 @@ export class Labs {
   age = 36;
   disabled = true;
   img = 'https://w3schools.com/howto/img_avatar.png';
+
   person = signal({
     name: 'Isco',
     age: 36,
     avatar : this.img,
   });
+
+  colorControl = new FormControl();
+
+  constructor() {
+    this.colorControl.valueChanges.subscribe(value => {
+      console.log(value);
+    })
+  }
 
   clickHandler() {
     alert('Hi')

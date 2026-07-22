@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { Task } from './../../models/task.model'
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -36,11 +37,20 @@ export class Home {
     },
   ]);
 
-  changeHandler(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const newTask = input.value;
-    this.addTask(newTask);
-    input.value = '';
+  newTaskControl = new FormControl('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.pattern(/^\S.*$/),
+    ]
+  });
+
+  changeHandler() {
+    if (this.newTaskControl.valid) {
+      const value = this.newTaskControl.value
+      this.addTask(value);
+      this.newTaskControl.setValue('');
+    }
   };
 
   addTask(title: string) {
