@@ -46,6 +46,16 @@ export class Home {
   injector = inject(Injector);
 
   /**
+  * Computed list of completed tasks.
+  */
+  completedTasks = computed(() => this.tasks().filter(task => task.completed));
+
+  /**
+  * Whether there is at least one completed task.
+  */
+  hasCompleted = computed(() => this.completedTasks().length > 0);
+
+  /**
   * Lifecycle hook called on component initialization.
   * Restores persisted tasks from localStorage and starts the persistence tracker.
   */
@@ -176,6 +186,11 @@ export class Home {
   * @param filter - The filter to apply: 'all', 'pending', or 'completed'.
   */
   changeFilter(filter: 'all' | 'pending' | 'completed') {
+    if (filter === 'completed' && !this.hasCompleted()) {
+      this.filter.set('all');
+      return;
+    }
+
     this.filter.set(filter);
   }
 }

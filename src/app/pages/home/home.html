@@ -74,6 +74,7 @@
           <li>
             <a
             [class.selected]="filter() === 'completed'"
+            [class.disabled]="!hasCompleted()"
             (click)="changeFilter('completed')"
             >Completed</a>
           </li>
